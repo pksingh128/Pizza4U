@@ -20,6 +20,10 @@ app.set('view engine','hbs');
 app.get('/',(req,res)=>{
     res.render('home');
 })
+
+app.get('/cart',(req,res)=>{
+    res.render('customers/cart')
+})
 //listening to port
 app.listen(port,()=>{
     console.log(`server up and running on the port ${port}`);

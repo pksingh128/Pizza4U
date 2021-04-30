@@ -6,13 +6,6 @@ body{
     box-sizing: border-box;
     font-family: 'Lato', sans-serif;
 }
-:root {
-    --primary :#FE5F1E;
-    --primary-hover:#b23301;
-    --pure: #fff;
-    --dark: #232323;
-    --gray: #ccc;
-  }
 
 
   html{
@@ -27,14 +20,15 @@ body{
 
 .navbar a:hover{
    
-    color:  var(--primary-hover)!important;
+    color:  #bb1919 !important;
 }
 .cart{
-    color: var(--primary);
+    color: #FE5F1E;
 }
 .cart:hover{
-    color: var(--primary-hover);
+    color: #b23301 !important;;
 }
+
 
   /*  ***************************** Header End *************/
   /*  ***************************** Banner Section Start *************/
