@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css");
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+:root {
+    --primary :#FE5F1E;
+    --primary-hover:#b23301;
+    --pure: #fff;
+    --dark: #232323;
+    --gray: #ccc;
+  }
+
+
+  html{
+    scroll-behavior: smooth;
+    margin: 0;
+
+}
+
+.navbar li{
+    margin-left: 2.5rem;
+}
+
+.navbar a:hover{
+   
+    color:  var(--primary-hover)!important;
+}
+.cart{
+    color: var(--primary);
+}
+.cart:hover{
+    color: var(--primary-hover);
+}
+
+  /*  ***************************** Header End *************/
+  /*  ***************************** Banner Section Start *************/
+
+  
+  /*  ***************************** Banner Section End *************/
