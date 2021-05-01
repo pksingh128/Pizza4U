@@ -1,32 +1,4 @@
-{{!-- <section class="hero">
-    <div class="container mx-auto d-flex justify-content-between align-items-center  ">
-        <div class="w-50 pr-5">
-            <h5><em>Are you hungry??</em></h5>
-            <h1>Dont wait</h1>
-        </div>
-        <div class="w-50 pt-5 pl-5">
-            <img src="/images/bg_1.png" alt="">
-        </div>
-    </div>
 
-</section> --}}
-{{!-- <section class="banner my-16">
-    <div class="spa-img w-50">
-        <img src="images/bg_1.png" class="image-fluid" alt="">
-    </div>
-    <div class="container w-50 ">
-        <div class="row">
-            <div class="col-lg-6 col-md-9">
-                <div class="banner-content">
-
-                    <h2><em>Are you hungry??</em></h2>
-                    <h1>Dont wait</h1>
-                    <a href="#" class="btn">reserve now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
 
 <section>
     <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -80,6 +52,7 @@
     </div>
 </section>
 
+ {{!-- //menu section --}}
 <div>
     <h1 class="text-center my-3">Our Menu</h1>
 </div>
@@ -87,23 +60,28 @@
 
 <section class="container mb-5 menu">
     <div class="row justify-content-center">
+        {{#each results}}
         <div class="col-sm-3 mb-5 py-3 py-sm-0">
-            <div class="card h-100 shadow card-body">
-                <img class="card-img-top img-fluid bg-image hover-zoom" src="images/piz1.jpg"
+                  <div class="card h-100 shadow card-body">
+                <img class="card-img-top img-fluid bg-image hover-zoom" src="images/{{this.image}}"
                     data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
                 <div class="card-block text-center">
-                    <h4 class="card-title">Margherita</h4>
-                    <span>Small</span>
+                    <h4 class="card-title">{{this.name}}</h4>
+                    <span>{{this.size}}</span>
                     <div >
-                        <span>Rs 250</span><br>
+                        <span>{{this.price}}</span><br>
                         <a href="#" class="btn btn-outline-success mt-3">+ Add</a>
                     </div>
                 </div>
             </div>
         </div>
+        {{/each}}
 
 
-        <div class="col-sm-3 mb-4 py-3 py-sm-0">
+            
+          
+
+        {{!-- <div class="col-sm-3 mb-4 py-3 py-sm-0">
             <div class="card h-100 shadow card-body">
                 <img class="card-img-top img-fluid" src="images/piz1.jpg" data-holder-rendered="true"
                     style="height: 180px; width: 100%; display: block;">
@@ -208,6 +186,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div> --}}
+    </div> 
 </section>

@@ -2,11 +2,50 @@ require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
+const session = require('express-session');
+const flash = require('express-flash')
+//const cookieParser = require('cookie-parser');
+const MYSQLStore = require('express-mysql-session')(session);
 
+//use express
 const app = express();
+
+//database connection
+const db = mysql.createConnection({
+    host            : process.env.DB_HOST,
+    user            : process.env.DB_USER,
+    password        : process.env.DB_pass,
+    database        : process.env.DB_NAME 
+});
+db.connect ((err)=>{
+    if(err)
+    console.log(err);
+    else{
+        console.log("Database connected");
+        }
+})
+
+//session store
+let sessionStore= new MYSQLStore({},db);
+//session config
+app.use(session({
+    secret:process.env.COOKIE_SECRET,
+    resave: false,
+    store: sessionStore,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000*60*60*24} //24hrs
+}))
+
+app.use(flash())
 
 //port 
 const port= process.env.PORT || 5000;
+
+//standard middleware for parsing json request
+app.use(express.json());
+
+//form data parsing
+app.use(express.urlencoded({extended:false}));
 
 //provide static files
 app.use(express.static('public'));
@@ -15,23 +54,9 @@ app.use(express.static('public'));
 app.engine('hbs',exphbs({ extname: '.hbs'}));
 app.set('view engine','hbs');
 
+//require and call web routes
+require('./routes/web')(app)
 
-
-app.get('/',(req,res)=>{
-    res.render('home');
-})
-
-app.get('/cart',(req,res)=>{
-    res.render('customers/cart')
-})
-
-app.get('/login',(req,res)=>{
-    res.render('auth/login')
-})
-
-app.get('/register',(req,res)=>{
-    res.render('auth/register')
-})
 
 //listening to port
 app.listen(port,()=>{
