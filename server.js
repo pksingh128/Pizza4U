@@ -24,6 +24,15 @@ app.get('/',(req,res)=>{
 app.get('/cart',(req,res)=>{
     res.render('customers/cart')
 })
+
+app.get('/login',(req,res)=>{
+    res.render('auth/login')
+})
+
+app.get('/register',(req,res)=>{
+    res.render('auth/register')
+})
+
 //listening to port
 app.listen(port,()=>{
     console.log(`server up and running on the port ${port}`);

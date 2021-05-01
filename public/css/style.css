@@ -31,7 +31,29 @@ body{
 
 
   /*  ***************************** Header End *************/
-  /*  ***************************** Banner Section Start *************/
-
-  
-  /*  ***************************** Banner Section End *************/
+  /*  ***************************** login Section Start *************/
+   #login-box {
+    margin-top: 80px;
+    max-width: 600px;
+    height: 320px;
+    
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+  }
+  #login-form {
+    padding: 20px;
+  }
+   #register-link {
+    margin-top: -85px;
+  }
+  #register-box{
+    height: 410px;
+    margin-top: 20px;
+    max-width: 600px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+  }
+  #login-link{
+      margin-top: -50px;
+  }
+  /*  ***************************** login Section End *************/
