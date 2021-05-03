@@ -1,5 +1,3 @@
-
-
 <section>
     <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -52,7 +50,7 @@
     </div>
 </section>
 
- {{!-- //menu section --}}
+{{!-- //menu section --}}
 <div>
     <h1 class="text-center my-3">Our Menu</h1>
 </div>
@@ -62,24 +60,25 @@
     <div class="row justify-content-center">
         {{#each results}}
         <div class="col-sm-3 mb-5 py-3 py-sm-0">
-                  <div class="card h-100 shadow card-body">
+            <div class="card h-100 shadow card-body">
                 <img class="card-img-top img-fluid bg-image hover-zoom" src="images/{{this.image}}"
                     data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
                 <div class="card-block text-center">
                     <h4 class="card-title">{{this.name}}</h4>
                     <span>{{this.size}}</span>
-                    <div >
+                    <div>
                         <span>{{this.price}}</span><br>
-                        <a href="#" class="btn btn-outline-success mt-3">+ Add</a>
                     </div>
+                    <button  data-pizza="{{JSONstringify this}}" type="button" class="add-to-cart btn btn-outline-success mt-3">+ Add</button>
+
                 </div>
             </div>
         </div>
         {{/each}}
 
 
-            
-          
+
+
 
         {{!-- <div class="col-sm-3 mb-4 py-3 py-sm-0">
             <div class="card h-100 shadow card-body">
@@ -121,7 +120,7 @@
                     <h4 class="card-title">Card title</h4>
 
                     <span>Small</span>
-                   <div class="">
+                    <div class="">
                         <span>Rs 250</span><br>
 
                         <a href="#" class="btn btn-outline-success mt-5">+ Add</a>
@@ -187,5 +186,8 @@
                 </div>
             </div>
         </div> --}}
-    </div> 
+    </div>
 </section>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script src="/js/app.js" type="module"></script>

@@ -2,9 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
+var helpers = require('handlebars-helpers')();
 const session = require('express-session');
 const flash = require('express-flash')
-//const cookieParser = require('cookie-parser');
+//const flush = require('connect-flash')
+const cookieParser = require('cookie-parser');
 const MYSQLStore = require('express-mysql-session')(session);
 
 //use express
@@ -35,17 +37,31 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 1000*60*60*24} //24hrs
 }))
+// flash messaging...
+app.use(cookieParser('keyboard cat'));
+app.use(session({ 
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }}
+));
 
 app.use(flash())
 
 //port 
 const port= process.env.PORT || 5000;
 
-//standard middleware for parsing json request
-app.use(express.json());
+// //standard middleware for parsing json request
+ app.use(express.json());
 
-//form data parsing
-app.use(express.urlencoded({extended:false}));
+// //form data parsing
+// app.use(express.urlencoded({extended:false}));
+
+//global middleware
+app.use((req, res, next) => {
+    res.locals.session = req.session
+    next()
+})
 
 //provide static files
 app.use(express.static('public'));
