@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 var helpers = require('handlebars-helpers')();
 const session = require('express-session');
+
 const flash = require('express-flash')
 //const flush = require('connect-flash')
 const cookieParser = require('cookie-parser');
@@ -35,18 +36,19 @@ app.use(session({
     resave: false,
     store: sessionStore,
     saveUninitialized: false,
-    cookie: { maxAge: 1000*60*60*24} //24hrs
+    cookie: { maxAge: 1000*60} //24hrs1000*60*60*24
 }))
-// flash messaging...
-app.use(cookieParser('keyboard cat'));
-app.use(session({ 
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }}
-));
+app.use(flash());
 
-app.use(flash())
+// flash messaging...
+// app.use(cookieParser('keyboard cat'));
+// app.use(session1({ 
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { maxAge: 60000 }}
+// ));
+// app.use(flush());
 
 //port 
 const port= process.env.PORT || 5000;

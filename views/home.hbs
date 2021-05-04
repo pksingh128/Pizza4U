@@ -50,6 +50,8 @@
     </div>
 </section>
 
+
+  <div id="alerts" class="alert bg-success my-3 ms-2 d-inline-block rounded-pill " role="alert" ><i class="bi bi-basket-fill"></i></div>
 {{!-- //menu section --}}
 <div>
     <h1 class="text-center my-3">Our Menu</h1>
@@ -69,7 +71,8 @@
                     <div>
                         <span>{{this.price}}</span><br>
                     </div>
-                    <button  data-pizza="{{JSONstringify this}}" type="button" class="add-to-cart btn btn-outline-success mt-3">+ Add</button>
+                    <button data-pizza="{{JSONstringify this}}" type="button"
+                        class="add-to-cart btn btn-outline-success mt-3">+ Add</button>
 
                 </div>
             </div>
@@ -190,4 +193,4 @@
 </section>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-   <script src="/js/app.js" type="module"></script>
+<script src="/js/app.js" type="module"></script>

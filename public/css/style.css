@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css");
-@import '~noty/src/noty.scss';
-@import '~noty/src/themes/mint.scss';
+
 body{
     margin: 0;
     padding: 0;
@@ -85,3 +84,5 @@ body{
 .red-cart {
 	color: #DF0000; background:white;
 }
+
+
