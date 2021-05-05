@@ -19,7 +19,7 @@ function updateCart(pizza){
 
  addToCarts.forEach((btn)=>{
      btn.addEventListener('click', (e)=>{
-         let pizza = JSON.parse(btn.dataset.pizza)
+         let pizza = JSON.parse(btn.dataset.pizza) //parse the strangify data
          updateCart(pizza)
          console.log(pizza)
      })

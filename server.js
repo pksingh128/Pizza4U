@@ -4,9 +4,8 @@ const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 var helpers = require('handlebars-helpers')();
 const session = require('express-session');
-
 const flash = require('express-flash')
-//const flush = require('connect-flash')
+const passport = require('passport')
 const cookieParser = require('cookie-parser');
 const MYSQLStore = require('express-mysql-session')(session);
 
@@ -28,6 +27,9 @@ db.connect ((err)=>{
         }
 })
 
+
+
+
 //session store
 let sessionStore= new MYSQLStore({},db);
 //session config
@@ -36,19 +38,17 @@ app.use(session({
     resave: false,
     store: sessionStore,
     saveUninitialized: false,
-    cookie: { maxAge: 1000*60} //24hrs1000*60*60*24
+    cookie: { maxAge: 1000*60*60 } //24hrs1000*60*60*24
 }))
-app.use(flash());
 
-// flash messaging...
-// app.use(cookieParser('keyboard cat'));
-// app.use(session1({ 
-//     secret: 'keyboard cat',
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { maxAge: 60000 }}
-// ));
-// app.use(flush());
+
+//passport config
+const passportInit = require('./app/pConfig/passport')
+passportInit(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(flash());
 
 //port 
 const port= process.env.PORT || 5000;
@@ -57,11 +57,12 @@ const port= process.env.PORT || 5000;
  app.use(express.json());
 
 // //form data parsing
-// app.use(express.urlencoded({extended:false}));
+ app.use(express.urlencoded({extended:false}));
 
 //global middleware
 app.use((req, res, next) => {
     res.locals.session = req.session
+    res.locals.user = req.user
     next()
 })
 

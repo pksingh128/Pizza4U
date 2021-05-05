@@ -36,12 +36,18 @@
                     <li class="nav-item mt-3">
                         <a class="nav-link" href="#">Offers</a>
                     </li>
+                    {{#if user}}
+                    <li class="nav-item mt-3">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    {{else}}
                     <li class="nav-item mt-3">
                         <a class="nav-link" href="/register">Register</a>
                     </li>
                     <li class="nav-item mt-3">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
+                    {{/if}}
                     <li class="nav-item">
                         <a class="nav-link" href="/cart"><span id="cartCounter" class="fa-stack fa-2x has-badge" data-count="{{session.cart.totalQty}}" >
                             <i class="fa fa-circle fa-stack-2x"></i>

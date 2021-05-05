@@ -1,29 +1,35 @@
 <div id="#login">
-    
-	  <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-6">
-                    <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
-                            <h3 class="text-center text-info">Login</h3>
-                            <div class="form-group">
-                                <label for="email" class=" form-label text-info fw-bold">Email:</label><br>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email">
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="text-info fw-bold">Password:</label><br>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="******">
-                            </div>
-                            <div class="form-group">
-                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-                                <input type="submit" name="submit" class="btn btn-info btn-rounded mt-3" value="Log In">
-                            </div>
-                            <div id="register-link" class="text-end">
-                                <a href="/register" class="text-info text-decoration-none">Don't have account?</a>
-                            </div>
-                        </form>
-                    </div>
+
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <form id="login-form" class="form" action="/login" method="POST">
+                        <h3 class="text-center text-info">Login</h3>
+                        {{#if messages.error}}
+                        <span class="badge bg-warning text-danger fst-italic fs-7">{{messages.error}}</span>
+                        {{/if}}
+                        <div class="form-group">
+                            <label for="email" class=" form-label text-info fw-bold">Email:</label><br>
+                            <input type="email" name="email" id="email" class="form-control"
+                                placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info fw-bold">Password:</label><br>
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="******">
+                        </div>
+                        <div class="form-group">
+                            <label for="remember-me" class="text-info"><span>Remember me</span> <span><input
+                                        id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                            <input type="submit" name="submit" class="btn btn-info btn-rounded mt-3" value="Log In">
+                        </div>
+                        <div id="register-link" class="text-end">
+                            <a href="/register" class="text-info text-decoration-none">Don't have account?</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </div>
