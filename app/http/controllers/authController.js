@@ -59,8 +59,14 @@ exports.postRegister = (req, res) => {
 }
 
 exports.postLogin = (req, res, next) => {
-     passport.authenticate('local', (err, user, info) => {
-           
+     const { name, email, password, passwordConfirm } = req.body;  //data coming from form
+     //validate request
+     if (!email || !password ) {
+          req.flash('error', 'All fields are required')
+          
+          return res.redirect('/login')
+     }
+     passport.authenticate('local', (err, user, info) => {    
           if (err) {
                req.flash('error', info.message)
                return next(err)
@@ -77,4 +83,11 @@ exports.postLogin = (req, res, next) => {
                return res.redirect('/') //resticted page
           })
      }) (req,res,next)
+}
+
+
+//logout
+exports.logout =(req,res) =>{
+     req.logout()
+     return res.redirect('/login')
 }

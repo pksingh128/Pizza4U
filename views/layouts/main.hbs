@@ -38,7 +38,10 @@
                     </li>
                     {{#if user}}
                     <li class="nav-item mt-3">
-                        <a class="nav-link" href="/logout">Logout</a>
+                        <form id="logout" action="/logout" method="POST">
+                        <a onclick="document.getElementById('logout').submit() " class="nav-link" href="#">Logout</a>
+                        </form>
+                        
                     </li>
                     {{else}}
                     <li class="nav-item mt-3">
@@ -54,8 +57,6 @@
                             <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                         </span> 
                         </a>
-
-
 
                     </li>
                 </ul>
