@@ -6,6 +6,7 @@ var helpers = require('handlebars-helpers')();
 const session = require('express-session');
 const flash = require('express-flash')
 const passport = require('passport')
+const path = require('path')
 const cookieParser = require('cookie-parser');
 const MYSQLStore = require('express-mysql-session')(session);
 
@@ -38,7 +39,7 @@ app.use(session({
     resave: false,
     store: sessionStore,
     saveUninitialized: false,
-    cookie: { maxAge: 1000*60*60 } //24hrs1000*60*60*24
+    cookie: { maxAge: 1000*60*60*2 } //24hrs1000*60*60*24
 }))
 
 
@@ -67,10 +68,12 @@ app.use((req, res, next) => {
 })
 
 //provide static files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname,'/public')));
+
+
 
 //Templating Engine 
-app.engine('hbs',exphbs({ extname: '.hbs'}));
+app.engine('hbs',exphbs({ defaultLayout: 'main',extname: '.hbs'}));
 app.set('view engine','hbs');
 
 //require and call web routes

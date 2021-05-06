@@ -1,0 +1,40 @@
+<section class="orders">
+    <div class="container">
+        <h3 class="mt-3 fw-bold">All orders</h3>
+        <div class="alert alert-success alert-dismissible bg-success text-white" role="alert">
+            user has been removed successfully
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <table class="table table-bordered table-hover shadow">
+  <thead>
+    <tr>
+      
+      <th scope="col">Orders</th>
+      <th scope="col">Address</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#if orders.length}}
+      {{#iterate orders}}
+      <tr>
+       <th scope="row"><a class="link text-decoration-none text-danger" href="/">{{this.o-Id}}</a></th>
+      
+      <td>{{this.address}}</td>
+      <td>{{this.created_at}}</td>
+    </tr>
+      {{/iterate}}
+    
+    {{else}}
+    <tr>
+           <td>No orders founds</td>
+    </tr>
+
+    {{/if}}
+    
+  </tbody>
+</table>
+
+    </div>
+
+</section>

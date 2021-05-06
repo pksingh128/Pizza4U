@@ -48,20 +48,22 @@
                 <span class="text-primary fw-bold">Total Amount : </span>
                 <span class="fw-bold ">{{session.cart.totalPrice}}</span>
             </div>
+            {{#if user}}
             <div class="mt-2 text-end">
-                <form action="" class="mt-3">
-                    <input type="text" class="w-50 mb-3" placeholder="Phone number">
-                    <input type="text" class="w-50" placeholder="Address">
+                <form action="/orders" method="POST" class="mt-3">
+                    <input name="phone" type="text" class="w-50 mb-3" placeholder="Phone number">
+                    <input type="text" name="address" class="w-50" placeholder="Address">
                     <div>
-                        <button class="btn btn-outline-warning my-3 px-3 text-dark" type="submit">Order
+                        <button class="btn btn-warning shadow-lg rounded-pill my-3 px-3 text-dark" type="submit">Order
                             Now</button>
                     </div>
                 </form>
             </div>
-            {{!-- <div class="text-end">
-                <a href="#" class="btn btn-success mt-3">Login to Continue</a>
-            </div> --}}
-
+          {{else}}
+             <div class="text-end">
+                <a href="/login" class="btn btn-danger shadow-lg rounded-pill mt-3">Login to Continue</a>
+            </div> 
+        {{/if}}
         </div>
     </div>
     {{else}}
@@ -75,7 +77,7 @@
                 style="height: 340px; width: 50%; display: d-flex">
         </div>
         <div class="text-center mt-4">
-            <a href=" /"><button type="button" class="btn btn-warning ">Go back</button></a>
+            <a href=" /"><button type="button" class="btn btn-warning shadow-lg rounded-pill">Go back</button></a>
         </div>
 
     </div>
