@@ -3,7 +3,11 @@ const mysql = require('mysql');
 const db = require('../../../app/config/connection')
 const bcrypt = require('bcrypt');
 const passport = require('passport')
-
+ 
+//get redirect after login
+const _getRedirectUrl = (req) =>{
+     return req.user[0].role === 'admin' ? '/admin/orders': '/customer/orders'
+}
 
 exports.login = (req, res) => {
      res.render('auth/login')
@@ -80,7 +84,7 @@ exports.postLogin = (req, res, next) => {
                     req.flash('error', info.message)
                     return next(err)
                }
-               return res.redirect('/') //resticted page
+               return res.redirect(_getRedirectUrl(req)) //resticted page
           })
      }) (req,res,next)
 }

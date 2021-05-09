@@ -9,3 +9,5 @@ ALTER TABLE `users` ADD UNIQUE(`email`);
 CREATE TABLE `pizza`.`orders` ( `o-Id` INT(11) NOT NULL AUTO_INCREMENT , `items` VARCHAR(200) NOT NULL , `phone` VARCHAR(100) NOT NULL , `address` TEXT NOT NULL , `paymentType` VARCHAR(100) NOT NULL DEFAULT 'COD' , `status` VARCHAR(100) NOT NULL DEFAULT 'order_placed' , `created_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`o-Id`)) ENGINE = InnoDB;
 
 ALTER TABLE `orders` ADD FOREIGN KEY (`customer_id`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`) VALUES (NULL, 'admin', 'admin@gmail.com', '$2b$08$5UMB8cCyRhPkUE7kh1SlJ.ZUewixEbJIeQLjNevzlFG2id2Prxnja', 'admin', CURRENT_TIMESTAMP);

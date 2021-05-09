@@ -6,10 +6,7 @@ const bcrypt = require('bcrypt')
 function init(passport) {
     passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, async (email, password, done) => {
         try {
-           // const { email, password } = req.body;
-            // if(!email || !password){
-            //     return done(null, false, { message: 'please provide email and password' })
-            // }
+        
             //login
             //cheak if email exist 
             const user = await db.query('SELECT * FROM users WHERE email=?', [email], (err, user) => {
