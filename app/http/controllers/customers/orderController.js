@@ -36,21 +36,33 @@ exports.store = (req, res) => {
 }
 
 
-exports.index = async(req, res) => {
-    
-    try{
-        const orders=await db.query('SELECT * FROM orders WHERE customer_id=?', [req.user[0].id], (err, orders) => {
-           if(!err){
+exports.index = (req, res) => {
+
+    const orders = db.query('SELECT * FROM orders WHERE customer_id=?', [req.user[0].id], (err, orders) => {
+        if (!err) {
 
             res.header('cache-control', 'no-cache,private,no-store,must-revalidate,max-stale=0, post-check=0, pre-check=0')
 
-               res.render('customers/orders',{orders})
-           //console.log(orders)
-           }else{
-               console.log(err)
-           }
-       })
-   } catch(err){
-       console.log(err)
-   }
-   }
+            res.render('customers/orders', { orders })
+            //console.log(orders)
+        } else {
+            console.log(err)
+        }
+    })
+}
+
+//
+exports.show = (req, res) => {
+
+    const order= db.query('SELECT * FROM orders WHERE order_id=?', [req.params.order_id], (err,order) => {
+        //Authorize user
+        
+        if (!err && req.user.id === order.customer_id) {
+             res.render('customers/singleOrder', {order })
+            //console.log(order)
+        } else {
+            console.log(err)
+            res.redirect('/')
+        }
+    })
+}

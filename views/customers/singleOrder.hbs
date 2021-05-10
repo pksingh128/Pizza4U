@@ -1,0 +1,79 @@
+{{!-- <section class="status">
+    <div class="container-sm mx-md-auto bg-white  my-2">
+        {{#each rows}}
+       <div class=" status-box w-50 p-3 mx-auto card ">
+           <div class="d-flex flex-md-row justify-content-md-between mt-3"><h6 class="fw-bold fs-5 ">Track delivary status</h6>
+           <h6 class="fw-bold rounded-md-pill bg-white shadow px-5 py-2 text-success">{{this.order_id}}</h6>
+           </div>
+       </div>
+       <ul>
+           <li class="status_line fs-5"><span>Order Placed</span></li>
+           <li class="status_line fs-5"><span>Order confirmation</span></li>
+           <li class="status_line fs-5"><span>Order Preparartion</span></li>
+           <li class="status_line fs-5"><span>Out for delivary</span></li>
+           <li class="status_line fs-5"><span>complete</span></li>
+       </ul>
+    </div>
+{{/each}}
+</section> --}}
+<div class="container">
+    <article class="card">
+        <header class="card-header"> My Orders / Tracking </header>
+        <div class="card-body">
+            {{#each order}}
+            <h6>Order ID: {{this.order_id}}</h6>
+            <input type="hidden" id="hiddenInput" value="{{JSONstringify this}}">
+            <article class="card">
+                <div class="card-body row">
+                    <div class="col"> <strong>Estimated Delivery time:</strong> <br> 14 MAY </div>
+                    <div class="col"> <strong>Shipping BY:</strong> <br> pizza corner, | <i class="fa fa-phone"></i> 7065869947 </div>
+                    <div class="col"> <strong>Status:</strong> <br> Picked by the delivary-boy </div>
+                    <div class="col"> <strong>Tracking #:</strong> <br> BD045903594059 </div>
+                </div>
+            </article>
+            <div class="track">
+                 <div class="step active"> <span class="icon"> <i class="las la-clipboard-check"></i> </span> <span class="text">Order Placed</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                  <div class="step active"> <span class="icon"> <i class="las la-pizza-slice"></i> </span> <span class="text">Preparation</span> </div>
+                <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Out for delivery </span> </div>
+              
+                     <div class="step"> <span class="icon"> <i class="las la-grin-beam"></i> </span> <span class="text">complete</span> </div>
+            </div>
+            <hr>
+            <ul class="row">
+                <li class="col-md-4">
+                    <figure class="itemside mb-3">
+                        <div class="aside"><img src="/images/pizza.png" class="img-sm border"></div>
+                        <figcaption class="info align-self-center">
+                            <p class="title">anner pizza<br>small</p> <span class="text-muted">RS 400</span>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li class="col-md-4">
+                    <figure class="itemside mb-3">
+                        <div class="aside"><img src="/images/pizza.png" class="img-sm border"></div>
+                        <figcaption class="info align-self-center">
+                            <p class="title">Panner pizza <br> Large</p> <span class="text-muted">RS 500</span>
+                        </figcaption>
+                    </figure>
+                </li>
+                <li class="col-md-4">
+                    <figure class="itemside mb-3">
+                        <div class="aside"><img src="/images/pizza.png" class="img-sm border"></div>
+                        <figcaption class="info align-self-center">
+                            <p class="title">panner pizza <br>small</p> <span class="text-muted">RS 250 </span>
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+            <hr> <a href="#" class="btn btn-warning" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
+        </div>
+    </article>
+    {{/each}}
+</div>
+
+
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/app.js" type="module"></script>

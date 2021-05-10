@@ -36,3 +36,13 @@ function updateCart(pizza){
  }
 
   initAdmin()
+  
+  //change order status
+  //change order status
+  let hiddenInput = document.querySelector('#hiddenInput')
+  let order = hiddenInput ? hiddenInput.value : null
+ console.log(order)
+  function updateStatus(order){
+
+  }
+  updateStatus(order);

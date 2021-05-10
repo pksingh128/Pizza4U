@@ -11,7 +11,7 @@ export function initAdmin() {
     }
   }).then (res=>{
     orders = res.data
-    console.log(orders) ;
+    //console.log(orders) ;
     markup = generateMarkup(orders)
     console.log(markup) ;
     orderTableBody.innerHTML = markup
@@ -34,13 +34,13 @@ export function initAdmin() {
 
 function generateMarkup(orders) {
   
-  console.log(orders) ;
+ // console.log(orders) ;
   //for (let i=0; i<orders.length; ++i) {
     return orders.map(order =>{
        return` 
         <tr>
         <td class="border">
-            <p>${order.id}</p>
+            <p>${order.order_id}</p>
             <div>${renderItems(JSON.parse(order.items))}</div>
         </td>
         <td class="border">${order.name}</td>
@@ -48,7 +48,7 @@ function generateMarkup(orders) {
         <td class="border ">
             <div class="d-flex ">
                 <form action="/admin/order/status" method="POST">
-                    <input type="hidden" name="orderId" value="${order.id}">
+                    <input type="hidden" name="orderId" value="${order.order_id}">
                     <select name="status" onchange="this.form.submit()"
                         class="form-select">
                         <option value="order_placed"

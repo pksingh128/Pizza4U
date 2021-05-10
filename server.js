@@ -79,7 +79,10 @@ app.engine('hbs',exphbs({ defaultLayout: 'main',extname: '.hbs'}));
 app.set('view engine','hbs');
 
 //require and call web routes
-require('./routes/web')(app)
+//require('./routes/web')(app)
+const routes = require('./routes/web')
+app.use('',routes);
+
 
 
 //listening to port
