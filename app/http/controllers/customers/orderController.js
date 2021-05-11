@@ -26,6 +26,7 @@ exports.store = (req, res) => {
         if (!err) {
             req.flash('success', 'Order placed succsessfully..')
             delete req.session.cart
+          
             return res.redirect('/customer/orders')
         } else {
             console.log(err)

@@ -9,6 +9,7 @@ const passport = require('passport')
 const path = require('path')
 const cookieParser = require('cookie-parser');
 const MYSQLStore = require('express-mysql-session')(session);
+const Emitter = require('events')
 
 //use express
 const app = express();
@@ -28,7 +29,9 @@ db.connect ((err)=>{
         }
 })
 
-
+//event emitter
+const eventEmitter = new Emitter()
+app.set('eventEmitter',eventEmitter)
 
 
 //session store
@@ -80,12 +83,35 @@ app.set('view engine','hbs');
 
 //require and call web routes
 //require('./routes/web')(app)
-const routes = require('./routes/web')
+const routes = require('./routes/web');
+const { Socket } = require('dgram');
 app.use('',routes);
 
-
+//error 404
+app.get('*',(req,res)=>{
+    res.render("404error",{
+      errorMsg:'Opps! Page Not Found'
+    })
+  })
 
 //listening to port
-app.listen(port,()=>{
+const server = app.listen(port,()=>{
     console.log(`server up and running on the port ${port}`);
 })
+
+
+//socket
+const io = require('socket.io')(server)
+io.on('connection',(socket)=>{
+    //join
+      //console.log(socket.id)
+      socket.on('join',(orderId)=>{
+          //console.log(orderId)
+         socket.join(orderId)
+      })
+})
+ eventEmitter.on('orderUpdated',(data)=>{
+     io.to(`order_${data.id}`).emit('orderUpdated',data)
+ })
+
+ 

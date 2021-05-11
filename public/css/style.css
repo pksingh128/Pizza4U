@@ -243,3 +243,18 @@ p {
     border-radius: 1px
 }
 
+/* 
+#footer{
+    clear: both;
+    height: 100px;
+    margin-top: 210px;
+    position: relative;
+    
+    
+} */
+
+/*errorpage */
+.errimg img{
+    width: 40rem;
+    height: 20rem;
+}

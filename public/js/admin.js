@@ -1,3 +1,4 @@
+//import { Socket } from "socket.io"
 
 
 export function initAdmin() {
@@ -11,6 +12,7 @@ export function initAdmin() {
     }
   }).then (res=>{
     orders = res.data
+
     //console.log(orders) ;
     markup = generateMarkup(orders)
     console.log(markup) ;
@@ -29,7 +31,7 @@ export function initAdmin() {
           <p>${menuItem.item.name} - ${menuItem.qty} pcs </p>
       `
     }).join('')
-    console.log(items)
+    //console.log(items)
   }
 
 function generateMarkup(orders) {
@@ -79,4 +81,5 @@ function generateMarkup(orders) {
 }).join('')
 
 }
+
 }
