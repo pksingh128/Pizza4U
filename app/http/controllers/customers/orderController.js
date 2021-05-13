@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const db = require('../../../config/connection')
+const date = require('date-and-time');
 
 
 
@@ -21,7 +22,7 @@ exports.store = (req, res) => {
     // console.log(`customer_Id = ${items}`)
 
 
-    db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?', [items, phone, address, customer_id], (err, rows) => {
+    db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?,placed_at=?', [items, phone, address, customer_id,date.format(new Date(), 'hh:mm A')], (err, rows) => {
         console.log(rows)
         if (!err) {
             req.flash('success', 'Order placed succsessfully..')
@@ -55,7 +56,7 @@ exports.index = (req, res) => {
 //
 exports.show = (req, res) => {
 
-    const order= db.query('SELECT * FROM orders WHERE order_id=?', [req.params.order_id], (err,order) => {
+    db.query('SELECT * FROM orders WHERE order_id=?', [req.params.order_id], (err,order) => {
         //Authorize user
         
         if (!err && req.user.id === order.customer_id) {

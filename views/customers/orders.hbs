@@ -24,7 +24,7 @@
        <th scope="row"><a class="link text-decoration-none text-danger" href="/customer/orders/{{this.order_id}}">{{this.order_id}}</a></th>
       <td>{{this.phone}}</td>
       <td>{{this.address}}</td>
-      <td>{{this.created_at}}</td>
+      <td>{{this.placed_at}}</td>
     </tr>
       {{/iterate}}
     
@@ -45,3 +45,4 @@
 
 
 <script src="/js/app.js" type="module"></script>
+<script src="/path/to/date-and-time.min.js"></script>

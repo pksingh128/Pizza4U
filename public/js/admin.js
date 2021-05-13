@@ -72,7 +72,7 @@ function generateMarkup(orders) {
             </div>
         </td>
         <td class="border px-4 py-2">
-            ${order.created_at}
+            ${order.placed_at}
         </td>
         <td class="border px-4 py-2">
             ${order.paymentStatus ? 'paid' : 'Not paid'}
