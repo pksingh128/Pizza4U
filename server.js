@@ -82,10 +82,10 @@ app.engine('hbs',exphbs({ defaultLayout: 'main',extname: '.hbs'}));
 app.set('view engine','hbs');
 
 //require and call web routes
-//require('./routes/web')(app)
-const routes = require('./routes/web');
-const { Socket } = require('dgram');
-app.use('',routes);
+require('./routes/web')(app)
+// const routes = require('./routes/web');
+
+// app.use('/',routes);
 
 //error 404
 app.get('*',(req,res)=>{
@@ -110,8 +110,11 @@ io.on('connection',(socket)=>{
          socket.join(orderId)
       })
 })
+//listen emit which is emitted by statuscontroller
  eventEmitter.on('orderUpdated',(data)=>{
      io.to(`order_${data.id}`).emit('orderUpdated',data)
  })
 
+
+  
  

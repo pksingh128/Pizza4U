@@ -7,7 +7,7 @@ import { initAdmin } from './admin.js'
 let addToCarts = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
 
- //console.log(carts)
+ //console.log(carts);
 function updateCart(pizza){
   axios.post('/update-cart',pizza).then(res=>{
       //console.log(res)//
@@ -70,12 +70,8 @@ let time = document.createElement('small')
         while(prevSibling){
           prevSibling.classList.add('active')
           prevSibling = prevSibling.previousElementSibling
-          //console.log(prevSibling)
-        
-         
-        }
-      
-      
+          //console.log(prevSibling)     
+        }  
       }
   })
   }
@@ -83,12 +79,15 @@ let time = document.createElement('small')
 
   //socket
   let socket = io()
-  //join
-  if(order){
-    socket.emit('join', `order_${order.order_id}`)
-  }
 
- 
+
+ //join
+ if(order){
+  socket.emit('join', `order_${order.order_id}`)
+}
+
+
+
 
   socket.on('orderUpdated',(data)=>{
     const updatedOrder = { ...order }

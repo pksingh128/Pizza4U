@@ -1,4 +1,3 @@
-//import { Socket } from "socket.io"
 
 
 export function initAdmin() {
@@ -15,7 +14,7 @@ export function initAdmin() {
 
     //console.log(orders) ;
     markup = generateMarkup(orders)
-    console.log(markup) ;
+   // console.log(markup) ;
     orderTableBody.innerHTML = markup
   }).catch(err => {
     console.log(err)

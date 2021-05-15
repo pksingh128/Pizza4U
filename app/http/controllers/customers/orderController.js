@@ -23,11 +23,15 @@ exports.store = (req, res) => {
 
 
     db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?,placed_at=?', [items, phone, address, customer_id,date.format(new Date(), 'hh:mm A')], (err, rows) => {
-        console.log(rows)
+       // console.log(rows)
         if (!err) {
             req.flash('success', 'Order placed succsessfully..')
             delete req.session.cart
-          
+
+            //emit event for socket
+            // const eventEmitter = req.app.get('eventEmitter')
+            // eventEmitter.emit('orderPlaced',rows)
+        
             return res.redirect('/customer/orders')
         } else {
             console.log(err)
@@ -40,7 +44,7 @@ exports.store = (req, res) => {
 
 exports.index = (req, res) => {
 
-    const orders = db.query('SELECT * FROM orders WHERE customer_id=?', [req.user[0].id], (err, orders) => {
+    db.query('SELECT * FROM orders WHERE customer_id=?', [req.user[0].id], (err, orders) => {
         if (!err) {
 
             res.header('cache-control', 'no-cache,private,no-store,must-revalidate,max-stale=0, post-check=0, pre-check=0')
