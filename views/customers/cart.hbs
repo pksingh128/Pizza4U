@@ -1,5 +1,14 @@
+{{!--
+
+<head>
+    <script type="text/javascript" src="https://js.stripe.com/v3"></script>
+</head> --}}
+
 <section class="cart py-5">
+   
+
     {{#if session.cart}}
+
     <div class="order container mx-auto w-50">
         <div class="d-flex border">
             <img src="images/cart-black.png" alt="">
@@ -19,68 +28,61 @@
 
             </div>
             {{/iterate}}
-            {{!-- <div class="d-flex my-3">
-                <img src="images/pizza.png" alt="" style="height: 90px; width: 20%;">
 
-                <div class=" flex-grow-1 ms-4">
-                    <h3>Mariana</h3>
-                    <span class="text-info">Medium</span>
+            <hr>
+            <div class="py-1">
+                <div class="text-end">
+                    <span class="text-primary fw-bold">Total Amount : </span>
+                    <span class="fw-bold ">{{session.cart.totalPrice}}</span>
                 </div>
-                <span class="flex-grow-1 fw-bold text-dark">1 pcs</span>
-                <span class="fw-bolder text-dark">Rs 300</span>
+                {{#if user}}
+                <div class="mt-2 text-end">
+                    <form action="/orders"  method="POST" class="mt-3" id="payment-form">
 
-            </div>
-            <div class="d-flex my-3">
-                <img src="images/pizza.png" alt="" style="height: 90px; width: 20%;">
-
-                <div class=" flex-grow-1 ms-4">
-                    <h3>Mariana</h3>
-                    <span class="text-info">Medium</span>
+                        <select id="paymentType" name="paymentType" class="form-select w-50 mb-3 ms-auto shadow"
+                            aria-label="Default select example">
+                            <option selected>Payment</option>
+                            <option value="cod">Cash on delivery</option>
+                            <option value="card">Pay with card</option>
+                        </select>
+                        <input name="phone" type="text" class="w-50 mb-3 shadow bg-white rounded border border-white"
+                            placeholder="Phone number">
+                        <input type="text" name="address" class="w-50 mb-3 shadow bg-white rounded border border-white"
+                            placeholder="Address">
+                        <div>
+                            <div id="card-element"></div>
+                            <button class="btn btn-warning shadow-lg rounded-pill my-3 px-3 text-dark"
+                                type="submit">Order
+                                Now</button>
+                        </div>
+                    </form>
                 </div>
-                <span class="flex-grow-1 fw-bold text-dark">1 pcs</span>
-                <span class="fw-bolder text-dark">Rs 300</span>
+                {{else}}
+                <div class="text-end">
+                    <a href="/login" class="btn btn-danger shadow-lg rounded-pill mt-3">Login to Continue</a>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        {{else}}
+        <div class="empty-cart">
+            <div class="container mx-auto text-center">
+                <h2 class="mb-3">Cart-Empty 😶</h2>
+                <p>
+                    You probably have not ordered any pizaa yet..To order Pizza go to the main page
+                </p>
+                <img class=" img-fluid" src="images/empty-cart.png" alt=""
+                    style="height: 340px; width: 50%; display: d-flex">
+            </div>
+            <div class="text-center mt-4">
+                <a href=" /"><button type="button" class="btn btn-warning shadow-lg rounded-pill"><i
+                            class="fa fa-chevron-left"></i> Go back to Menu</button></a>
+            </div>
 
-            </div>
-        </div> --}}
-        <hr>
-        <div class="py-1">
-            <div class="text-end">
-                <span class="text-primary fw-bold">Total Amount : </span>
-                <span class="fw-bold ">{{session.cart.totalPrice}}</span>
-            </div>
-            {{#if user}}
-            <div class="mt-2 text-end">
-                <form action="/orders" method="POST" class="mt-3">
-                    <input name="phone" type="text" class="w-50 mb-3" placeholder="Phone number">
-                    <input type="text" name="address" class="w-50" placeholder="Address">
-                    <div>
-                        <button class="btn btn-warning shadow-lg rounded-pill my-3 px-3 text-dark" type="submit">Order
-                            Now</button>
-                    </div>
-                </form>
-            </div>
-          {{else}}
-             <div class="text-end">
-                <a href="/login" class="btn btn-danger shadow-lg rounded-pill mt-3">Login to Continue</a>
-            </div> 
+        </div>
+
         {{/if}}
-        </div>
-    </div>
-    {{else}}
-    <div class="empty-cart">
-        <div class="container mx-auto text-center">
-            <h2 class="mb-3">Cart-Empty 😶</h2>
-            <p>
-                You probably have not ordered any pizaa yet..To order Pizza go to the main page
-            </p>
-            <img class=" img-fluid" src="images/empty-cart.png" alt=""
-                style="height: 340px; width: 50%; display: d-flex">
-        </div>
-        <div class="text-center mt-4">
-            <a href=" /"><button type="button" class="btn btn-warning shadow-lg rounded-pill"><i class="fa fa-chevron-left"></i>  Go back to Menu</button></a>
-        </div>
-
-    </div>
-
-    {{/if}}
 </section>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/app.js" type="module"></script>

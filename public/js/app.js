@@ -1,6 +1,9 @@
 //import axios from 'axios'
 //const axios = require('axios')
+//import axios from 'axios'
+
 import { initAdmin } from './admin.js'
+import { initStripe } from './stripe.js'
 
 
 
@@ -25,7 +28,7 @@ function updateCart(pizza){
      btn.addEventListener('click', (e)=>{
          let pizza = JSON.parse(btn.dataset.pizza) //parse the strangify data
          updateCart(pizza)
-         console.log(pizza)
+        // console.log(pizza)
      })
  })
 
@@ -77,6 +80,13 @@ let time = document.createElement('small')
   }
   updateStatus(order);
 
+  //payment widget
+   initStripe()
+
+//Ajex call for cart.hbs
+
+
+
   //socket
   let socket = io()
 
@@ -103,4 +113,5 @@ let time = document.createElement('small')
         alerts.innerHTML = "order updated";
 
 })
+
   
