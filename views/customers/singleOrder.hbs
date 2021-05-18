@@ -7,7 +7,8 @@
             {{#each order}}
             <h6 class="fw-bold text-success">Order ID: {{this.order_id}}</h6>
             
-            <div id="alerts" class="alert bg-success-light my-3 ms-2  text-success " role="alert" ></div>
+            <div id="order-update" class=" " role="alert" ></div>
+            
 
         
             <input type="hidden" id="hiddenInput" value="{{JSONstringify this}}">
@@ -16,7 +17,7 @@
                     <div class="col"> <strong>Estimated Delivery time:</strong> <br> 14 MAY </div>
                     <div class="col"> <strong>Shipping BY:</strong> <br> pizza corner, | <i class="fa fa-phone"></i>
                         7065869947 </div>
-                    <div class="col"> <strong>Status:</strong> <br> {{{this.status}}} </div>
+                    <div class="col"  id="updateStatus"> <strong>Status:</strong> <br> {{this.status}} </div>
                     <div class="col"> <strong>Tracking #:</strong> <br>{{this.order_id}} </div>
                 </div>
             </article>

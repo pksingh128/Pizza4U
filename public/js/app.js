@@ -4,6 +4,7 @@
 
 import { initAdmin } from './admin.js'
 import { initStripe } from './stripe.js'
+import { show } from '../partials/message.js'
 
 
 
@@ -16,11 +17,21 @@ function updateCart(pizza){
       //console.log(res)//
       cartCounter.dataset.count = res.data.totalQty
      //alert('added')
-     var alerts = document.getElementById("alerts");
-    alerts.innerHTML = pizza.name + " Added to cart";  
+    //  var alerts = document.getElementById("alerts");
+    // alerts.innerHTML = pizza.name + " Added to cart";  
+    //show(pizza.name + " Added to cart", "success", "cart-alerts")
+    let e = document.getElementById("cart-alerts");
+    e.setAttribute("class", `alert alert-success bg-success rounded-pill text-end me-3 my-3`);
+    e.innerText = pizza.name + " Added to cart"; 
+    e.style.display = "inline-block";
+    setTimeout(() => {
+      e.style.display = "none";
+    }, 1*1000);
+  
   }).catch(err=>{
-    var alerts = document.getElementById("alerts");
-    alerts.innerHTML ="something went wrong";  
+    // var alerts = document.getElementById("alerts");
+    // alerts.innerHTML ="something went wrong";  
+    show('something went wrong', "danger", "cart-alerts")
   })
 }
 
@@ -50,6 +61,7 @@ function updateCart(pizza){
   //change order status
   //change order status
   let statuses =  document.querySelectorAll('.status-line')
+  //let updateStatus = document.getElementById('updateStatus') 
  // console.log(statuses)
   let hiddenInput = document.querySelector('#hiddenInput')
   let order = hiddenInput ? hiddenInput.value : null
@@ -66,6 +78,7 @@ let time = document.createElement('small')
     
       if(dataProp === order.status){
         time.innerText = order.placed_at
+      
         status.append(time)
         status.classList.add('active')
         
@@ -102,6 +115,7 @@ let time = document.createElement('small')
   socket.on('orderUpdated',(data)=>{
     const updatedOrder = { ...order }
    // console.log(updatedOrder)
+  
     
     updatedOrder.placed_at = new Date().toLocaleTimeString(navigator.language,{hour:'2-digit',minute:'2-digit'})
     
@@ -109,8 +123,10 @@ let time = document.createElement('small')
     //console.log(data)
     updateStatus(updatedOrder)
         //alert('added')
-        var alerts = document.getElementById("alerts");
-        alerts.innerHTML = "order updated";
+        // var alerts = document.getElementById("alerts");
+        // alerts.innerHTML = "order updated";
+        document.getElementById('updateStatus').innerHTML = ` status : ${updatedOrder.status}`;
+        show('order updated successfully', "success", "order-update")
 
 })
 

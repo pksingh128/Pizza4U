@@ -11,7 +11,7 @@ exports.store = (req, res) => {
 
     const { phone, address, stripeToken, paymentType } = req.body
     if (!phone || !address) {
-        // req.flash('error', 'All fields are required')
+        //return req.flash('error', 'All fields are required')
         return res.status(400).json({ message: 'All fields are required' })
 
         // return res.redirect('/cart')

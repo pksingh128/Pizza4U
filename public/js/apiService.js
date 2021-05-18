@@ -1,14 +1,19 @@
+import {show} from '../partials/message.js'
+
 export function placeOrders(formObject){
     axios.post('/orders', formObject).then((res)=>{
-        alert(res.data.message)
+       // alert(res.data.message)
             //alert('added') 
-        setTimeout(()=>{
+            show(res.data.message, "success", "cart-message")
+
+        setTimeout(()=>{  
          window.location.href = '/customer/orders'
-        },1000)
+        },2000)
     
        // console.log(res.data)
        }).catch((err)=>{
-         //console.log(err)
-         alert(err.res.data.message)
+        show(err.res.data.message, "danger", "cart-message");
+         console.log(err)
+         ///alert(err.data.message)
        })
 }
