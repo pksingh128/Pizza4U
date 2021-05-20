@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const db = require('../../../config/connection')
 const date = require('date-and-time');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
-//const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
 
 
@@ -10,28 +10,67 @@ exports.store = (req, res) => {
     // console.log(req.body)
     //validate request
 
-    const { phone, address, stripeToken, paymentType } = req.body
+    const { phone, email,address, stripeToken, paymentType } = req.body
     const customer_id = req.user[0].id;
     const items = JSON.stringify(req.session.cart.items);
 
     if (!phone || !address) {
-        //return req.flash('error', 'All fields are required')
+
         return res.json({ message: 'All fields are required' })
-
-        // return res.redirect('/cart')
-
     }
 
-
-    // console.log(`customer_Id = ${items}`)
-
-   if (paymentType === 'cod') {
+    if (paymentType === 'cod') {
         db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?,placed_at=?', [items, phone, address, customer_id, date.format(new Date(), 'hh:mm A')], (err, rows) => {
             console.log(rows)
             if (!err) {
                 //stripe payment
+
+
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: process.env.EMAIL,
+                        pass: process.env.PASS,
+                    },
+
+                });
+
+                // setup email data with unicode symbols
+                let mailOptions = {
+                    from: `"Pizza corner" <${process.env.EMAIL}>`, // sender address
+                    to: email, // list of receivers
+                    subject: 'Order Confirmation', // Subject line
+                    text: 'Hello world?', // plain text body
+                    html: `<strong>Thanks for the Order</strong>
+                      <h3>Order summary</h3>
+                       <ul>
+                       <li>Amount: ${req.session.cart.totalPrice} </li>
+                       <li>Total-Qty: ${req.session.cart.totalQty} </li>
+                       <li>Payment-Type:(${paymentType}) : pay at delivary time</li>
+                       </ul>
+                       <h3>Customer Details</h3>
+                       <ul>
+                       <li>Address: ${address} </li>
+                       <li>Phone Number: ${phone} </li>
+                       <li>Email: ${email} </li>
+                       </ul>`// html body// html body
+                };
+
+                // send mail with defined transport object
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    console.log('Message sent: %s', info.messageId);
+                    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+
+                });
                 delete req.session.cart
-                return res.json({ message: 'Order placed succesfully' })
+                return res.json({ message: 'Order placed succesfully and Email has been sent ' })
+
+
+
             }
             else {
                 console.log(err)
@@ -45,7 +84,7 @@ exports.store = (req, res) => {
 
         ///you can take more details from form
         stripe.customers.create({
-            email: 'pksingh706586@gmail.com',
+
             name: 'Prashant'
 
         })
@@ -64,8 +103,51 @@ exports.store = (req, res) => {
                 db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?,placed_at=?, paymentStatus=?,paymentType=?', [items, phone, address, customer_id, date.format(new Date(), 'hh:mm A'), true, paymentType], (err, r) => {
                     if (!err) {
                         console.log(r)
+
+
+                        let transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                                user: process.env.EMAIL,
+                                pass: process.env.PASS,
+                            },
+
+                        });
+
+                        // setup email data with unicode symbols
+                        let mailOptions = {
+                            from: `"Pizza corner" <${process.env.EMAIL}>`, // sender address
+                            to: email, // list of receivers
+                            subject: 'Order Confirmation', // Subject line
+                            text: 'Hello world?', // plain text body
+                            html: `<strong>Thanks for the Order</strong>
+                            <h3>Order summary</h3>
+                             <ul>
+                             <li>Amount: ${req.session.cart.totalPrice} </li>
+                             <li>Total-Qty: ${req.session.cart.totalQty} </li>
+                             <li>Payment-Type:(${paymentType}) : it's paid online</li>
+                             </ul>
+                             <h3>Customer Details</h3>
+                             <ul>
+                             <li>Address: ${address} </li>
+                             <li>Phone Number: ${phone} </li>
+                             <li>Email: ${email} </li>
+                             </ul>`// html body
+                        };
+
+                        // send mail with defined transport object
+                        transporter.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                                return console.log(error);
+                            }
+                            console.log('Message sent: %s', info.messageId);
+                            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+
+                        });
+
                         delete req.session.cart
-                        return res.json({ message: 'Payment Successful,Order placed succsessfully..' })
+                        return res.json({ message: 'Payment Successful,Order placed succsessfully,email has been sent.' })
                     } else {
                         console.log(err)
                     }
