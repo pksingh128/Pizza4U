@@ -75,10 +75,6 @@ export async function initStripe() {
         console.log(err)
       })
 
-
-
-
-
     })
   }
 

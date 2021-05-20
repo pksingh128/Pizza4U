@@ -12,7 +12,7 @@ export function placeOrders(formObject){
     
        // console.log(res.data)
        }).catch((err)=>{
-        show(err.res.data.message, "danger", "cart-message");
+        show(err.data.message, "danger", "cart-message");
          console.log(err)
          ///alert(err.data.message)
        })

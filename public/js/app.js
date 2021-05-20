@@ -21,7 +21,7 @@ function updateCart(pizza){
     // alerts.innerHTML = pizza.name + " Added to cart";  
     //show(pizza.name + " Added to cart", "success", "cart-alerts")
     let e = document.getElementById("cart-alerts");
-    e.setAttribute("class", `alert alert-success bg-success rounded-pill text-end me-3 my-3`);
+    e.setAttribute("class", `alert alert-success bg-success rounded-pill text-end text-white me-3 my-3`);
     e.innerText = pizza.name + " Added to cart"; 
     e.style.display = "inline-block";
     setTimeout(() => {
@@ -117,7 +117,7 @@ let time = document.createElement('small')
    // console.log(updatedOrder)
   
     
-    updatedOrder.placed_at = new Date().toLocaleTimeString(navigator.language,{hour:'2-digit',minute:'2-digit'})
+    updatedOrder.placed_at = data.placed_at
     
     updatedOrder.status = data.status
     //console.log(data)
@@ -125,7 +125,8 @@ let time = document.createElement('small')
         //alert('added')
         // var alerts = document.getElementById("alerts");
         // alerts.innerHTML = "order updated";
-        document.getElementById('updateStatus').innerHTML = ` status : ${updatedOrder.status}`;
+        document.getElementById('updateStatus').innerHTML = `Status:
+         ${updatedOrder.status}`;
         show('order updated successfully', "success", "order-update")
 
 })

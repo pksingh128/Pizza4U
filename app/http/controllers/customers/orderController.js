@@ -2,6 +2,7 @@ const mysql = require('mysql');
 const db = require('../../../config/connection')
 const date = require('date-and-time');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+//const nodemailer = require('nodemailer');
 
 
 
@@ -10,72 +11,114 @@ exports.store = (req, res) => {
     //validate request
 
     const { phone, address, stripeToken, paymentType } = req.body
+    const customer_id = req.user[0].id;
+    const items = JSON.stringify(req.session.cart.items);
+
     if (!phone || !address) {
         //return req.flash('error', 'All fields are required')
-        return res.status(400).json({ message: 'All fields are required' })
+        return res.json({ message: 'All fields are required' })
 
         // return res.redirect('/cart')
 
     }
 
-    const customer_id = req.user[0].id;
-    const items = JSON.stringify(req.session.cart.items);
+
     // console.log(`customer_Id = ${items}`)
 
+   if (paymentType === 'cod') {
+        db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?,placed_at=?', [items, phone, address, customer_id, date.format(new Date(), 'hh:mm A')], (err, rows) => {
+            console.log(rows)
+            if (!err) {
+                //stripe payment
+                delete req.session.cart
+                return res.json({ message: 'Order placed succesfully' })
+            }
+            else {
+                console.log(err)
 
-    db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?,placed_at=?', [items, phone, address, customer_id, date.format(new Date(), 'hh:mm A')], (err, rows) => {
-        // console.log(rows)
-        if (!err) {
-            //stripe payment
-            if (paymentType === 'card') {
-                 ///you can take more details from form
-                stripe.customers.create({
-                    email: 'pksingh706586@gmail.com',
-                    name: 'Prashant'
-                   
-                })
-                .then((customer)=>{
-                   
+                // req.flash('error', 'Something went wrong')
+                return res.status(500).json({ message: 'something went wrong' })
+            }
+        })
+    }
+    else {
+
+        ///you can take more details from form
+        stripe.customers.create({
+            email: 'pksingh706586@gmail.com',
+            name: 'Prashant'
+
+        })
+            .then((customer) => {
+
                 return stripe.charges.create({
                     amount: req.session.cart.totalPrice * 100,
                     source: stripeToken,
                     currency: 'inr',
                     description: `Pizza order(customer-id): ${customer.id}`
                 })
-                }).then((charge) => {
-                    // rows.paymentStatus = true;
-                    db.query('UPDATE orders SET paymentStatus=?,paymentType=? WHERE orders.paymentStatus=?', [true,paymentType,false], (err, r) => {
-                        if (!err) {
-                            console.log(r)
-                            delete req.session.cart
-                            return res.json({ message: 'Payment Successful,Order placed succsessfully..' })
-                        } else {
-                            console.log(err)
-                        }
+            }).then((charge) => {
+                // rows.paymentStatus = true;
+                // rows.paymentType = paymentType
 
-                    })
-                }).catch((err) => {
-                    console.log(err)
-                    delete req.session.cart
-                    return res.json({ message: 'Order placed but  Payment failed,you can pay at delivery time.' })
+                db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?,placed_at=?, paymentStatus=?,paymentType=?', [items, phone, address, customer_id, date.format(new Date(), 'hh:mm A'), true, paymentType], (err, r) => {
+                    if (!err) {
+                        console.log(r)
+                        delete req.session.cart
+                        return res.json({ message: 'Payment Successful,Order placed succsessfully..' })
+                    } else {
+                        console.log(err)
+                    }
+
                 })
-            } else{
+            }).catch((err) => {
+                console.log(err)
                 delete req.session.cart
-                return res.json({ message: 'Order placed succesfully' })
-            }
+                return res.json({ message: 'Order placed but  Payment failed,you can pay at delivery time.' })
+            })
 
 
-
-        } else {
-            console.log(err)
-
-            // req.flash('error', 'Something went wrong')
-            return res.status(500).json({ message: 'something went wrong' })
+    }
 
 
-        }
-    })
 }
+
+
+// if (paymentType === 'card') { 
+//     ///you can take more details from form
+//    stripe.customers.create({
+//        email: 'pksingh706586@gmail.com',
+//        name: 'Prashant'
+
+//    })
+//    .then((customer)=>{
+
+//    return stripe.charges.create({
+//        amount: req.session.cart.totalPrice * 100,
+//        source: stripeToken,
+//        currency: 'inr',
+//        description: `Pizza order(customer-id): ${customer.id}`
+//    })
+//    }).then((charge) => {
+//        rows.paymentStatus = true;
+//        rows.paymentType = paymentType
+
+//        db.query('INSERT INTO orders SET items=?,phone=?,address=?,customer_id=?,placed_at=?, paymentStatus=?,paymentType=? WHERE paymentType != ?', [items, phone, address, customer_id, date.format(new Date(), 'hh:mm A'),rows.paymentStatus,rows.paymentType,'COD'], (err, r) => {
+//            if (!err) {
+//                console.log(r)
+//                delete req.session.cart
+//                return res.json({ message: 'Payment Successful,Order placed succsessfully..' })
+//            } else {
+//                console.log(err)
+//            }
+
+//        })
+//    }).catch((err) => {
+//        console.log(err)
+//        delete req.session.cart
+//        return res.json({ message: 'Order placed but  Payment failed,you can pay at delivery time.' })
+//    })
+// }
 
 
 exports.index = (req, res) => {
