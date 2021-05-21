@@ -27,7 +27,7 @@ function init(passport) {
         } catch (error) {
             console.log(error);
         }
-
+    }))
    //to serialize - userinformation store in session
         passport.serializeUser((user, done) => {
             done(null, user[0].id)
@@ -38,7 +38,7 @@ function init(passport) {
                 done(err, user)
             })
         })
-    }))
+   
 }
 
 

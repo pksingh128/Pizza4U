@@ -2,6 +2,8 @@
 const homeController = require('../app/http/controllers/homeController')
 const authController = require('../app/http/controllers/authController')
 const cartController = require('../app/http/controllers/customers/cartController')
+const contactController =  require('../app/http/controllers/customers/contactController')
+
 const orderController = require('../app/http/controllers/customers/orderController')
 
 const adminOrderController = require('../app/http/controllers/admin/orderController')
@@ -25,6 +27,10 @@ app.post('/logout',authController.logout)
 
 app.get('/cart',cartController.cart)
 app.post('/update-cart',cartController.update)
+
+//contact
+app.get('/contact',auth,contactController.contact)
+app.post('/contact',auth,contactController.postContact)
 
 
 //customer routes

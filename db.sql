@@ -11,3 +11,4 @@ CREATE TABLE `pizza`.`orders` ( `o-Id` INT(11) NOT NULL AUTO_INCREMENT , `items`
 ALTER TABLE `orders` ADD FOREIGN KEY (`customer_id`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`) VALUES (NULL, 'admin', 'admin@gmail.com', '$2b$08$5UMB8cCyRhPkUE7kh1SlJ.ZUewixEbJIeQLjNevzlFG2id2Prxnja', 'admin', CURRENT_TIMESTAMP);
+CREATE TABLE `pizza`.`contacts` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(200) NOT NULL , `email` VARCHAR(100) NOT NULL , `phone` VARCHAR(100) NOT NULL , `message` VARCHAR(1000) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

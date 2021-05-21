@@ -205,7 +205,7 @@ exports.store = (req, res) => {
 
 exports.index = (req, res) => {
 
-    db.query('SELECT * FROM orders WHERE customer_id=? AND orders.status !="completed" ', [req.user[0].id], (err, orders) => {
+    db.query('SELECT * FROM orders WHERE customer_id=? AND orders.status !="completed" ORDER BY order_id DESC ', [req.user[0].id], (err, orders) => {
         if (!err) {
 
             res.header('cache-control', 'no-cache,private,no-store,must-revalidate,max-stale=0, post-check=0, pre-check=0')

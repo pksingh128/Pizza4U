@@ -67,6 +67,7 @@ const port= process.env.PORT || 5000;
 app.use((req, res, next) => {
     res.locals.session = req.session
     res.locals.user = req.user
+    res.locals.msg = req.flash('msg')
     next()
 })
 
