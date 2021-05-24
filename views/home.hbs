@@ -58,12 +58,13 @@
 
 
 {{!-- //menu section --}}
+{{#if user}}
 <div id="cart-alerts" class=" " role="alert"></div>
 <div>
     <h1 id="menusection" class="text-center my-3">Our Menu</h1>
 
 </div>
-
+{{/if}}
 
 <section class="container-md mb-5 menu">
     <div class="row justify-content-center">
@@ -78,9 +79,10 @@
                     <div>
                         <span>{{this.price}}</span><br>
                     </div>
+                    
                     <button data-pizza="{{JSONstringify this}}" type="button"
                         class="add-to-cart btn btn-outline-success mt-3 rounded-pill shadow">+ Add</button>
-
+                  
                 </div>
             </div>
         </div>

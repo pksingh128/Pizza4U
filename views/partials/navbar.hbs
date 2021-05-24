@@ -1,15 +1,14 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
     <div class="container-fluid ">
-        <div class="col-md-3"> 
+        <div class="col-md-3">
             <a href="/">
                 <img src="/images/orange.gif" class="img-fluid me-3" width="100" height="60" alt="logo">
             </a>
             <a class="navbar-brand fw-bold" href="/"> Pizza </a>
-        
-        </div> 
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,11 +17,18 @@
                 <li class="nav-item mt-3">
                     <a class="nav-link" href="#menusection"> Menu </a>
                 </li>
-                <li class="nav-item mt-3">
-                    <a class="nav-link" href="#">Offers</a>
-                </li>
+            
+
                 {{#if user}}
+                   {{#iterate user}}
+                    <li class="nav-item mt-3">
+               
+                    <a class="nav-link " href="#">{{this.name}}</a>
+                </li>
+                {{/iterate}}
+                
                 <li class="nav-item mt-3">
+
                     <form id="logout" action="/logout" method="POST">
                         <a onclick="document.getElementById('logout').submit() " class="nav-link" href="#">Logout</a>
                     </form>
@@ -35,12 +41,13 @@
                 <li class="nav-item mt-3">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
-               
+
                 {{/if}}
-                    <li class="nav-item mt-3">
+                <li class="nav-item mt-3">
                     <a class="nav-link" href="/contact">Contact us</a>
                 </li>
                 <li class="nav-item ">
+
                     <a class="nav-link" href="/cart"><span id="cartCounter" class="fa-stack fa-2x has-badge"
                             data-count="{{session.cart.totalQty}}">
                             <i class="fa fa-circle fa-stack-2x"></i>
@@ -48,11 +55,9 @@
                         </span>
                     </a>
 
+
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
-
-

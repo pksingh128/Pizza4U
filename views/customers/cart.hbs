@@ -24,6 +24,7 @@
                     <h3>{{this.item.name}}</h3>
                     <span class="text-info">{{this.item.size}}</span>
                 </div>
+      
                 <span class="flex-grow-1 fw-bold text-dark">{{this.qty}} Pcs</span>
                 <span class="fw-bolder text-dark"> ₹ {{multiply this.item.price this.qty }}</span>
 
@@ -46,10 +47,15 @@
                             <option value="cod">Cash on delivery</option>
                             <option value="card">Pay with card</option>
                         </select>
-                        <input name="phone" type="text" class="w-50 mb-3 shadow bg-white rounded border border-white"
-                            placeholder="Phone number">
-                              <input name="email" type="email" class="w-50 mb-3 shadow bg-white rounded border border-white"
+                        
+            {{#iterate user}}
+                        <input name="phone" id="inputPhone" type="text" class="w-50 mb-3 shadow bg-white rounded border border-white"
+                          value="{{this.phone}}"  placeholder="Phone number">
+                              <input name="email" id="inputEmail"
+                              type="email" class="w-50 mb-3 shadow bg-white rounded border border-white" value="{{this.email}}"
                             placeholder="Email">
+                            
+            {{/iterate}}
                         <input type="text" name="address" class="w-50 mb-3 shadow bg-white rounded border border-white"
                             placeholder="Address">
                         <div>

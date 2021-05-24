@@ -9,20 +9,25 @@ import { show } from '../partials/message.js'
 
 
 let addToCarts = document.querySelectorAll('.add-to-cart')
+let removeToCart = document.querySelectorAll(".remove-to-cart");
 let cartCounter = document.querySelector('#cartCounter')
 
  //console.log(carts);
-function updateCart(pizza){
-  axios.post('/update-cart',pizza).then(res=>{
+function updateCart(pizza,url, msg){
+  axios.post(url,pizza).then(res=>{
       //console.log(res)//
+      if(res.data.totalQty){
       cartCounter.dataset.count = res.data.totalQty
-     //alert('added')
-    //  var alerts = document.getElementById("alerts");
-    // alerts.innerHTML = pizza.name + " Added to cart";  
-    //show(pizza.name + " Added to cart", "success", "cart-alerts")
+      }else{
+        //cartCounter.dataset.count = ''
+        res.data.totalQty = 0;
+      }
+    
+     
+
     let e = document.getElementById("cart-alerts");
     e.setAttribute("class", `alert alert-success bg-success rounded-pill text-end text-white me-3 my-3`);
-    e.innerText = pizza.name + " Added to cart"; 
+    e.innerText = pizza.name + " " +  msg; 
     e.style.display = "inline-block";
     setTimeout(() => {
       e.style.display = "none";
@@ -38,7 +43,11 @@ function updateCart(pizza){
  addToCarts.forEach((btn)=>{
      btn.addEventListener('click', (e)=>{
          let pizza = JSON.parse(btn.dataset.pizza) //parse the strangify data
-         updateCart(pizza)
+         if (pizza.item) {
+          pizza = pizza.item;
+      }
+      let url = "/update-cart";
+         updateCart(pizza,url,"added to cart")
         // console.log(pizza)
      })
  })

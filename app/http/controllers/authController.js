@@ -16,13 +16,14 @@ exports.register = (req, res) => {
      res.render('auth/register')
 }
 exports.postRegister = (req, res) => {
-     const { name, email, password, passwordConfirm } = req.body;  //data coming from form
+     const { name, email,phone, password, passwordConfirm } = req.body;  //data coming from form
      //console.log(req.body)
      //validate request
-     if (!name || !email || !password || !passwordConfirm) {
+     if (!name || !email || !phone || !password || !passwordConfirm) {
           req.flash('error', 'All fields are required')
           req.flash('name', name)
           req.flash('email', email)
+          req.flash('phone', phone)
           return res.redirect('/register')
      }
 
@@ -32,18 +33,20 @@ exports.postRegister = (req, res) => {
                req.flash('error', 'Email already taken')
                req.flash('name', name)
                req.flash('email', email)
+               req.flash('phone', phone)
                return res.redirect('/register')
           }
           else if (password !== passwordConfirm) {
                req.flash('error', 'Password do not match')
                req.flash('name', name)
                req.flash('email', email)
+               req.flash('phone', phone)
                return res.redirect('/register')
           }
           //Hash passowrd
           let hashedPassword = await bcrypt.hash(password, 8);
           console.log(hashedPassword);
-          db.query('INSERT INTO users SET ?', { name: name, email: email, password: hashedPassword }, (err, results) => {
+          db.query('INSERT INTO users SET ?', { name: name, email: email,phone: phone, password: hashedPassword }, (err, results) => {
                if (err) {
                     console.log(err);
                     req.flash('error', 'Something went wrong')
@@ -51,7 +54,7 @@ exports.postRegister = (req, res) => {
                } else {
                     //login
                     console.log(results)
-                    req.flash('error', 'Sucessfully registered')
+                    req.flash('msg', 'Sucessfully registered')
                     return res.redirect('/')
 
                }

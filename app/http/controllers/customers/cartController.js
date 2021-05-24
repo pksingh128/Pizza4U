@@ -2,6 +2,8 @@
 
 
 exports.cart = (req,res) =>{
+    
+
     res.render('customers/cart')
 }
 
@@ -35,3 +37,4 @@ exports.update = (req,res) => {
 
     return res.json({totalQty: req.session.cart.totalQty})
 }
+

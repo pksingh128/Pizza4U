@@ -24,8 +24,6 @@ exports.store = (req, res) => {
             console.log(rows)
             if (!err) {
                 //stripe payment
-
-
                 let transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {

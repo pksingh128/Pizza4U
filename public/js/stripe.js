@@ -53,7 +53,7 @@ export async function initStripe() {
   if (paymentForm) {
     paymentForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      let formData = new FormData(paymentForm);//js inbuild class for get data from form
+      let formData = new FormData(paymentForm); //js inbuild class for get data from form
       let formObject = {}
       for (let [key, value] of formData.entries()) {
         formObject[key] = value;

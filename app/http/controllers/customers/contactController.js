@@ -13,9 +13,7 @@ exports.postContact = (req,res) =>{
      const {name, email, phone, message} =req.body;
      if (!name || !email ||!phone || ! message) {
         req.flash('msg', 'All fields are required')
-        req.flash('name', name)
-        req.flash('email', email)
-        req.flash('email', phone)
+     
         return res.redirect('/contact')
    }
 
@@ -58,7 +56,7 @@ exports.postContact = (req,res) =>{
    transporter.sendMail(mailOptions, (error, info) => {
        if (error) {
            return console.log(error);
-           res.render('customers/contact', {msg:'Email has been sent'});
+           //res.render('customers/contact', {msg:'some thing went wrong'});
        }
      
        console.log('Message sent: %s', info.messageId);   

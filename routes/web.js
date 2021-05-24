@@ -25,8 +25,9 @@ app.get('/register',guest, authController.register)
 app.post('/register',authController.postRegister)
 app.post('/logout',authController.logout)
 
-app.get('/cart',cartController.cart)
-app.post('/update-cart',cartController.update)
+app.get('/cart',auth,cartController.cart)
+app.post('/update-cart',auth,cartController.update)
+
 
 //contact
 app.get('/contact',auth,contactController.contact)

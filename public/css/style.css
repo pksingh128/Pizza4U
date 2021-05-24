@@ -48,7 +48,7 @@ body{
     margin-top: -75px;
   }
   #register-box{
-    height: 410px;
+    height: 480px;
     margin-top: 20px;
     max-width: 600px;
     border: 1px solid #9C9C9C;
@@ -357,3 +357,9 @@ p {
     border: none;
     cursor: pointer;
 }
+
+
+
+
+
+  
