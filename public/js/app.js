@@ -36,7 +36,7 @@ function updateCart(pizza,url, msg){
   }).catch(err=>{
     // var alerts = document.getElementById("alerts");
     // alerts.innerHTML ="something went wrong";  
-    show('something went wrong', "danger", "cart-alerts")
+    show('Please login', "danger", "cart-alerts")
   })
 }
 
