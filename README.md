@@ -4,7 +4,8 @@ Payment can be done using online mode or cash on delivery(COD)
 
 
 ## Home page
-![Home-page](https://github.com/pksingh128/pizza/edit/master/images/home.JPG)
+![Home-page](https://github.com/pksingh128/pizza/blob/master/public/images/home.JPG)
+![Home-page](https://github.com/pksingh128/pizza/blob/master/public/images/menu.JPG)
 
 
 # How it works
