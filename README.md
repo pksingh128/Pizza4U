@@ -5,7 +5,7 @@ Payment can be done using online mode or cash on delivery(COD)
 
 ## Home page
 [![Home-page](https://github.com/pksingh128/pizza/blob/master/public/images/home.JPG)](https://www.youtube.com/watch?v=5_i6bY6iYtQ)
-![Home-page](https://github.com/pksingh128/pizza/blob/master/public/images/menu.JPG)
+[![Home-page](https://github.com/pksingh128/pizza/blob/master/public/images/menu.JPG)](https://www.youtube.com/watch?v=5_i6bY6iYtQ)
 
 
 # How it works
@@ -74,5 +74,5 @@ Open up your browser and head over to:
 * http://localhost:5000/
 
 ## Project Demo
-https://www.youtube.com/watch?v=5_i6bY6iYtQ
+- https://www.youtube.com/watch?v=5_i6bY6iYtQ
 
