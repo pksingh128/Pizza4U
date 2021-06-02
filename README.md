@@ -2,6 +2,12 @@
 This is a web app ,where you can order pizzas online in more convenient way, and track its delivery just like email in real time.Now isn't that convenient.
 Payment can be done using online mode or cash on delivery(COD)
 
+
+## Home page
+[![Home-page](https://github.com/pksingh128/pizza/blob/master/public/images/home.JPG)](https://www.youtube.com/watch?v=5_i6bY6iYtQ)
+[![Home-page](https://github.com/pksingh128/pizza/blob/master/public/images/menu.JPG)](https://www.youtube.com/watch?v=5_i6bY6iYtQ)
+
+
 # How it works
 Details of how system works.
 ## Clients Side
@@ -66,3 +72,7 @@ This will launch the Node server on port 5000. If that port is busy, you can set
 Open up your browser and head over to:
 
 * http://localhost:5000/
+
+## Project Demo
+- https://www.youtube.com/watch?v=5_i6bY6iYtQ
+
