@@ -243,13 +243,12 @@ p {
     border-radius: 1px
 }
 
-
- #footer{
-    clear: both;
+.footer{
+  
     height: 100px;
     margin-top: 210px;
     position: relative;
-    background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+   
     
     
 } 
@@ -299,10 +298,10 @@ p {
 
 
 /* contact form */
-
- body{
+body{
     background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
- }
+    
+ } 
 
   .contact-form{
     background: #fff;
