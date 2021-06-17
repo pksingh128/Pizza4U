@@ -15,15 +15,15 @@ let cartCounter = document.querySelector('#cartCounter')
  //console.log(carts);
 function updateCart(pizza,url, msg){
   axios.post(url,pizza).then(res=>{
-      //console.log(res)//
+      //console.log(res)
       if(res.data.totalQty){
       cartCounter.dataset.count = res.data.totalQty
       }else{
         //cartCounter.dataset.count = ''
         res.data.totalQty = 0;
       }
-    
-     
+      
+      
 
     let e = document.getElementById("cart-alerts");
     e.setAttribute("class", `alert alert-success bg-success rounded-pill text-end text-white me-3 my-3`);
@@ -38,6 +38,9 @@ function updateCart(pizza,url, msg){
     // alerts.innerHTML ="something went wrong";  
     show('Please login', "danger", "cart-alerts")
   })
+
+  
+
 }
 
  addToCarts.forEach((btn)=>{
@@ -51,6 +54,15 @@ function updateCart(pizza,url, msg){
         // console.log(pizza)
      })
  })
+
+ removeToCart.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+  let pizza = JSON.parse(btn.dataset.pizza);
+  let url = "/remove-cart";
+  updateCart(pizza.item, url, "Item removed to cart");
+  
+})
+})
 
  //remove alert message after some time
  const alertMsg = document.querySelector('#success-alert')

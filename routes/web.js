@@ -27,6 +27,7 @@ app.post('/logout',authController.logout)
 
 app.get('/cart',auth,cartController.cart)
 app.post('/update-cart',auth,cartController.update)
+app.post("/remove-cart", cartController.remove);
 
 
 //contact

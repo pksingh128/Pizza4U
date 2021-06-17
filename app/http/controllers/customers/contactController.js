@@ -34,14 +34,17 @@ exports.postContact = (req,res) =>{
     `;
  
     // create reusable transporter object using the default SMTP transport
-   let transporter = nodemailer.createTransport({
-     service: 'gmail',
-     auth: {
-         user: process.env.EMAIL,
-         pass: process.env.PASS,
-     },
-     
-   });
+    let transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure: false,
+
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASS,
+        },
+
+    });
  
    // setup email data with unicode symbols
    let mailOptions = {
@@ -60,7 +63,7 @@ exports.postContact = (req,res) =>{
        }
      
        console.log('Message sent: %s', info.messageId);   
-       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
      //  res.render('customers/contact', {msg:'Email has been sent'});
       req.flash('msg', 'Email has been sent')
        return res.redirect('/contact')

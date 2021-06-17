@@ -10,27 +10,33 @@
 
     {{#if session.cart}}
 
-    <div class="order container mx-auto w-50">
-        <div class="d-flex border">
+    <div class="order container-lg mx-auto w-50">
+        <div class="d-flex shadow justify-content-center">
             <img src="images/cart-black.png" alt="">
-            <h2 class="ms-4 text-dark">Order Summary</h2>
+            <h2 class="ms-3 text-dark fw-bold ">Order Summary</h2>
         </div>
         <div class="pizza-list">
-            {{#iterate session.cart.items}}
-            <div class="d-flex my-3">
-                <img src="images/{{this.item.image}}" alt="" style="height: 90px; width: 20%;">
+          
+            {{#iterate session.cart.items }}
+             
+            <div class="d-flex my-3 cartProduct">
+                <img src="images/{{this.item.image}}" alt="" style="height: 90px; width: 20%; " class="ms-3">
 
-                <div class=" flex-grow-1 ms-4">
-                    <h3>{{this.item.name}}</h3>
-                    <span class="text-info">{{this.item.size}}</span>
+                <div class="flex-grow-1 ms-3">
+                    <h3 class="fw-bold">{{this.item.name}}</h3>
+                    <span class="text-dark fw-bold">{{this.item.size}}</span>
                 </div>
       
-                <span class="flex-grow-1 fw-bold text-dark">{{this.qty}} Pcs</span>
-                <span class="fw-bolder text-dark"> ₹ {{multiply this.item.price this.qty }}</span>
+                <span class="flex-grow-1 ms-3 fw-bold text-dark">{{this.qty}} Pcs</span>
+                <span class="fw-bolder text-dark ms-3"> ₹ {{multiply this.item.price this.qty }}</span>
+               
+                  <span><button data-pizza="{{JSONstringify this}}" type="button"
+                        class="remove-to-cart btn btn-outline-danger ms-3 rounded-pill shadow flex-grow-1">Delete</button></span>
 
             </div>
             {{/iterate}}
-
+         
+           
             <hr>
             <div class="py-1">
                 <div class="text-end">
@@ -77,7 +83,7 @@
         <div class="empty-cart">
             <div class="container mx-auto text-center">
                 <h2 class="mb-3">Cart-Empty 😶</h2>
-                <p>
+                <p class="fs-4">
                     You probably have not ordered any pizaa yet..To order Pizza go to the main page
                 </p>
                 <img class=" img-fluid" src="images/empty-cart.png" alt=""
