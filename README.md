@@ -75,4 +75,7 @@ Open up your browser and head over to:
 
 ## Project Demo
 - https://www.youtube.com/watch?v=5_i6bY6iYtQ
+<hr>
+
+ **🙏  Don't forget to give a star ❇️ to this repository. :)**
 
