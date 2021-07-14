@@ -1,4 +1,4 @@
-## 𝐏𝐢𝐳𝐳𝐚❹𝐔 (Pizza Ordering and Real Time Tracking System)
+## 𝐏𝐢𝐳𝐳𝐚❹𝐔
 This is a web app ,where you can order pizzas online in more convenient way, and track its delivery just like email in real time.Now isn't that convenient.
 Payment can be done using online mode or cash on delivery(COD)
 
