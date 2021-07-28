@@ -12,12 +12,12 @@ export function initAdmin() {
   }).then (res=>{
     orders = res.data
 
-    //console.log(orders) ;
+  //  console.log(orders) ;
     markup = generateMarkup(orders)
    // console.log(markup) ;
     orderTableBody.innerHTML = markup
   }).catch(err => {
-    console.log(err)
+   // console.log(err)
   })
 
 
@@ -35,7 +35,7 @@ export function initAdmin() {
 
 function generateMarkup(orders) {
   
- // console.log(orders) ;
+  //console.log(orders) ;
   //for (let i=0; i<orders.length; ++i) {
     return orders.map(order =>{
        return` 
@@ -78,7 +78,5 @@ function generateMarkup(orders) {
         </td>
     </tr>`
 }).join('')
-
 }
-
 }
